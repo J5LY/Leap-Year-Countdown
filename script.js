@@ -1,5 +1,5 @@
 let leapYear = "29 Feb, 2024"
-let differenceInSeconds
+let differenceInSeconds = 0
 const yearsHTML = document.getElementById('years')
 const monthsHTML = document.getElementById('months')
 const daysHTML = document.getElementById('days')
@@ -7,6 +7,8 @@ const hoursHTML = document.getElementById('hours')
 const minutesHTML = document.getElementById('minutes')
 const secondsHTML = document.getElementById('seconds')
 const statement = document.getElementById('underStatement')
+const body = document.body; 
+let background_color = ['blue', "green","red", "yellow"];
 
 
 document.getElementById("birthday").addEventListener("change", function() {
@@ -20,14 +22,11 @@ function countdownTimer(){
     const leap = new Date(leapYear)
 
     let difference = leap - currentTime
-    let differenceInSeconds = difference / 1000 - 39600; 
+    differenceInSeconds = difference / 1000 - 39600; 
+    //differenceInSeconds = 0
 
     if (isNaN(differenceInSeconds)) leapYear = "29 Feb, 2024"; 
     
-    if (differenceInSeconds === 0){
-        alert('Happy Birthday');
-    }
-
     if (differenceInSeconds < 0) {
         differenceInSeconds = differenceInSeconds * -1;
 
@@ -37,7 +36,7 @@ function countdownTimer(){
             statement.innerHTML = 'until it is your birthday';
      }
 
-    console.log(difference)
+    //console.log(difference)
 
     let years = Math.floor(differenceInSeconds / 60 / 60 / 24 / 365)
     let months = Math.floor((differenceInSeconds / 60 / 60 / 24) * 0.0328767) % 12
@@ -55,25 +54,28 @@ function countdownTimer(){
     hoursHTML.innerHTML = hours
     minutesHTML.innerHTML = minutes
     secondsHTML.innerHTML = seconds
+    
+    
 }
 
 
+// if (differenceInSeconds === 0){
+//         for(i=0;i < 4; i++){
+//             background_function(background_color[i])
+//             }
+// }
+
+function celebrate(){
+    if (differenceInSeconds < 10){
+        body.style.backgroundImage = 'url(celebrate.jpg)'; 
+    }
+    else {
+        body.style.backgroundImage = 'url(background.jpg)'; 
+    }
+}
+
 countdownTimer();
+celebrate();
 
+setInterval(celebrate, 1000);
 setInterval(countdownTimer, 1000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
